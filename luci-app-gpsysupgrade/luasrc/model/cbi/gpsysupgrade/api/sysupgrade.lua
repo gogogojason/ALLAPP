@@ -40,13 +40,13 @@ function to_check()
 		if remoteformat > sysverformat and currentTimeStamp > remoteformat then needs_update = true else needs_update = false end
         download_url = "https://op.supes.top/firmware/phicomm-k2p/" ..dateyr.. "-openwrt-ramips-mt7621-phicomm_k2p-squashfs-sysupgrade.bin"
     elseif model:match(".*AC2100.*") then
-		api.exec(api.wget, {api._unpack(api.wget_args), "-O", version_file, "http://lover.ink:8666/upgrade/redmi2100/version.txt"}, nil, api.command_timeout)
-		api.exec(api.wget, {api._unpack(api.wget_args), "-O", updatelogs, "http://lover.ink:8666/upgrade/redmi2100/updatelogs.txt"}, nil, api.command_timeout)
+		api.exec(api.wget, {api._unpack(api.wget_args), "-O", version_file, "https://op.supes.top/firmware/redmi-ac2100/version.txt"}, nil, api.command_timeout)
+		api.exec(api.wget, {api._unpack(api.wget_args), "-O", updatelogs, "https://op.supes.top/firmware/redmi-ac2100/updatelogs.txt"}, nil, api.command_timeout)
 		remote_version = luci.sys.exec("[ -f '" ..version_file.. "' ] && echo -n `cat " ..version_file.. "`")
 		dateyr = luci.sys.exec("echo " ..remote_version.. " | awk -F. '{printf $1\".\"$2}'")
 		remoteformat = luci.sys.exec("date -d $(echo " ..remote_version.. " | awk -F. '{printf $3\"-\"$1\"-\"$2}') +%s")
 		if remoteformat > sysverformat and currentTimeStamp > remoteformat then needs_update = true else needs_update = false end
-        download_url = "http://lover.ink:8666/upgrade/redmi2100/" ..dateyr.. "-openwrt-ramips-mt7621-redmi-ac2100-squashfs-sysupgrade.bin"
+        download_url = "https://op.supes.top/firmware/redmi-ac2100/" ..dateyr.. "-openwrt-ramips-mt7621-redmi-ac2100-squashfs-sysupgrade.bin"
     elseif model:match(".*R2S.*") then
 		api.exec(api.wget, {api._unpack(api.wget_args), "-O", version_file, "https://op.supes.top/firmware/nanopi-r2s/version.txt"}, nil, api.command_timeout)
 		api.exec(api.wget, {api._unpack(api.wget_args), "-O", updatelogs, "https://op.supes.top/firmware/nanopi-r2s/updatelogs.txt"}, nil, api.command_timeout)
